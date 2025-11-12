@@ -16,17 +16,13 @@ public class ConsultaApi {
                 .uri(direccion)
                 .build();
 
-        HttpResponse<String> response;
-
-        {
-            try {
-                response = client
-                        .send(request, HttpResponse.BodyHandlers.ofString());
+        try {
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
 
             return new Gson().fromJson(response.body(), DatosDeApi.class);
-            } catch (IOException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }
